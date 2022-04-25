@@ -1,0 +1,15 @@
+<%= render 'shared/errors', obj: @post %>
+<%= form_with(model: post) do |f| %>
+  <div class="mb-3">
+    <%= f.text_field :title, class: 'form-control', placeholder: 'Post Title' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.rich_text_area :content, class: 'form-control', placeholder: 'Post Content' %>
+  </div>
+  
+  <div class="mb-3">
+    <%= f.submit class: 'btn btn-sm btn-primary' %>
+    <%= link_to 'Cancle', posts_path, class: 'btn btn-sm btn-warning me-2' %>
+  </div>
+<% end %>
