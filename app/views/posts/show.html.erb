@@ -4,7 +4,19 @@
     <div class="col-md-8">
       <div class="card">
         <% if @post.featured_image.attached? %>
-          <%= image_tag @post.featured_image, class: 'card-img-top', alt: 'src' %>
+          <% if @post.featured_image.image? %>
+            <%= link_to image_tag(@post.featured_image, class: 'card-img-top', alt: "#{@post.featured_image.filename}"), post_path(@post) %>
+          <% elsif @post.featured_image.video? %>
+            <%= link_to post_path(@post) do %>
+            <video autoplay muted controls>
+              <source src="<%= rails_blob_url(@post.featured_image) %>" type="<%= @post.featured_image.content_type %>">
+            </video>
+            <% end %>
+          <% else %>
+            <%= link_to post_path(@post) do %>
+              <%= image_tag 'pdf.jpg', alt: "Download file", class: 'card-img-top' %>
+            <% end %>
+          <% end %>
         <% end %>
 
         <div class="card-body">
