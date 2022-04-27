@@ -11,7 +11,11 @@
             <p class="card-text"><%= truncate(strip_tags(post.content.to_s), length: 75) %></p>
           </div>
           <div class="card-footer text-xs">
-            <span>Posted <%= time_ago_in_words(post.created_at) %> ago</span>
+            <span class="me-2">Posted <%= time_ago_in_words(post.created_at) %> ago</span>
+            <span class="badge bg-secondary">
+              Comments - 
+              <%= post.comments.count %>
+            </span>
           </div>
         </div>
       <% end %>

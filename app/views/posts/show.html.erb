@@ -19,5 +19,17 @@
       </div>
     </div>
   </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card card-body mt-3 bg-light">
+        <%# Add New Comment %>
+        <%= render 'comments/form' %>
+
+        <%# Show All Comments %>
+        <%= render @post.comments.order("created_at desc") %>
+      </div>
+    </div>
+  </div>
 </div>
 

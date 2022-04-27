@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "comment_#{@comment.id}" do %>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_area :body, class: 'form-control mb-3' %>
+    <%= f.submit class: 'btn btn-sm btn-success' %>
+    <%= link_to 'Cancle', post_path(@post), class: 'btn btn-sm btn-warning' %>
+  <% end %>
+<% end %>
