@@ -10,5 +10,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # Image
-  has_one_attached :featured_image
+  has_one_attached :featured_image do |attachable|
+    attachable.variant :widethumb, resize_to_fill: [740, 320] #indexpage thumb
+    #attachable.variant :singthumb, resize_to_limit: [740, 320] #single page top image
+  end
 end

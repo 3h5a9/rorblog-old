@@ -8,3 +8,11 @@ body{
 .text-xs{
   font-size: .85rem;
 }
+
+
+trix-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+}
