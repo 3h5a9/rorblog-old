@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand navbar-light bg-light shadow-sm">
     <div class="container">
-    <%= link_to 'roblog', root_path, class: 'navbar-brand' %>
+    <%= link_to root_path, class: 'navbar-brand' do %>
+      <div class="h2 d-block mb-0">rorBlog</div>
+      <span class="text-xs text-muted text-uppercase">blog for blogger</span>
+    <% end %>
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
