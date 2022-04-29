@@ -2,7 +2,7 @@
 <%= form_with(model: post) do |f| %>
   
   <div class="row">
-    <div class="col">
+    <div class="col-md-8">
       <div class="mb-3">
         <%= f.text_field :title, class: 'form-control', placeholder: 'Post Title' %>
       </div>
@@ -15,9 +15,13 @@
         <%= f.submit class: 'btn btn-sm btn-primary' %>
         <%= link_to 'Cancle', posts_path, class: 'btn btn-sm btn-warning me-2' %>
       </div>
+      <%= f.file_field :featured_image, class: 'form-control' %>
     </div>
-    <div class="col">
-      <%= f.file_field :featured_image %>
+
+    <div class="col-md-4">
+        <h4>Select Category</h4>
+        <%= f.select :category_id, Category.all.collect { |p| [ p.name, p.id ] }, {}, {class: 'form-select'} %>
+        <%= link_to 'Add New Category', new_category_path, class: 'btn btn-sm btn-success mt-3' %>
     </div>
   </div>
 <% end %>

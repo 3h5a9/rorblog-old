@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  belongs_to :category
+
   # rich text
   has_rich_text :content
 
@@ -12,6 +14,5 @@ class Post < ApplicationRecord
   # Image
   has_one_attached :featured_image do |attachable|
     attachable.variant :widethumb, resize_to_fill: [740, 320] #indexpage thumb
-    #attachable.variant :singthumb, resize_to_limit: [740, 320] #single page top image
   end
 end

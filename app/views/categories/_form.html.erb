@@ -1,0 +1,18 @@
+<%= render 'shared/errors', obj: @category %>
+
+<%= turbo_frame_tag @category do %>
+  <%= form_with(model: category) do |f| %>
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Category Name' %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.submit class: 'btn btn-sm btn-primary' %>
+          <%= link_to 'Cancle', categories_path, class: 'btn btn-sm btn-warning me-2', :'data-turbo-frame' => '_top' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

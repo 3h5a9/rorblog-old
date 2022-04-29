@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_categories
 
   def index
     @posts = Post.all.order('created_at desc')
@@ -45,6 +46,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :featured_image)
+    params.require(:post).permit(:title, :content, :featured_image, :category_id)
+  end
+
+  def set_categories
+    @categories = Category.all.order('Created_at desc')
   end
 end
