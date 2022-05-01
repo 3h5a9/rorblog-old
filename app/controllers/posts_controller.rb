@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.order('created_at desc')
+    @fet_post = Post.featured.last
   end
 
   def new
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :featured_image, :category_id)
+    params.require(:post).permit(:title, :content, :featured_image, :posttype, :category_id)
   end
 
   def set_categories

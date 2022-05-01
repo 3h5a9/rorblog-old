@@ -1,6 +1,50 @@
 <%= render 'shared/navbar' %>
 
 <div class="container my-5">
+  <div class="row my-5">
+    <div class="col">
+      <div class="card">
+        <div class="row">
+          <div class="col">
+            <% if @fet_post.featured_image.attached? %>
+              <% if @fet_post.featured_image.image? %>
+                <%= link_to image_tag(@fet_post.featured_image.variant(:herothumb), class: 'card-img-top', alt: "#{@fet_post.featured_image.filename}"), post_path(@fet_post) %>
+              <% elsif @fet_post.featured_image.video? %>
+                <%= link_to post_path(@fet_post) do %>
+                <video autoplay muted controls>
+                  <source src="<%= rails_blob_url(@fet_post.featured_image) %>" type="<%= @fet_post.featured_image.content_type %>">
+                </video>
+                <% end %>
+              <% else %>
+                <%= link_to post_path(@fet_post) do %>
+                  <%= image_tag 'pdf.jpg', alt: "Download file", class: 'card-img-top' %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="col">
+            <div class="card-body">
+              <h2 class="card-title"><%= link_to @fet_post.title, post_path(@fet_post), class: 'text-decoration-none fw-bold' %></h2>
+              <div class="text-xs text-danger mb-3">
+                <span>
+                  Category - 
+                  <%= @fet_post.category.name %>
+                  | 
+                </span>
+                <span>
+                  Published 
+                  <%= time_ago_in_words(@fet_post.created_at) %>
+                  ago
+                </span>
+              </div>
+              <p class="card-text"><%= truncate(strip_tags(@fet_post.content.to_s), length: 200) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-8">
       <div id="posts">

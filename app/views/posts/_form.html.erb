@@ -1,7 +1,7 @@
 <%= render 'shared/errors', obj: @post %>
 <%= form_with(model: post) do |f| %>
   
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-md-8">
       <div class="mb-3">
         <%= f.text_field :title, class: 'form-control', placeholder: 'Post Title' %>
@@ -10,18 +10,60 @@
       <div class="mb-3">
         <%= f.rich_text_area :content, class: 'form-control', placeholder: 'Post Content' %>
       </div>
-      
-      <div class="mb-3">
-        <%= f.submit class: 'btn btn-sm btn-primary' %>
-        <%= link_to 'Cancle', posts_path, class: 'btn btn-sm btn-warning me-2' %>
-      </div>
-      <%= f.file_field :featured_image, class: 'form-control' %>
     </div>
 
     <div class="col-md-4">
-        <h4>Select Category</h4>
-        <%= f.select :category_id, Category.all.collect { |p| [ p.name, p.id ] }, {}, {class: 'form-select'} %>
-        <%= link_to 'Add New Category', new_category_path, class: 'btn btn-sm btn-success mt-3' %>
+      <div class="sticky-top">
+        <div class="mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <%= f.submit class: 'btn btn-sm btn-primary' %>
+              <%= link_to 'Cancle', posts_path, class: 'btn btn-sm btn-warning me-2' %>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h4>Select Category</h4>
+              <%= f.select :category_id, Category.all.collect { |p| [ p.name, p.id ] }, {}, {class: 'form-select'} %>
+              <%= link_to 'Add New Category', new_category_path, class: 'btn btn-sm btn-success mt-3' %>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h4>Post Type</h4>
+              <%= f.select(:posttype, options_for_select(Post.posttypes.map {|key, value| [key.titleize, Post.posttypes.key(value)]}, @post.posttype), {}, {class: 'form-select'}) %>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="card bg-light">
+            <div class="card-body">
+              <h4>Add Featured Image</h4>
+              <%= f.file_field :featured_image, class: 'form-control mb-3' %>
+
+              <% if post.featured_image.attached? %>
+                <% if post.featured_image.image? %>
+                  <%= link_to image_tag(post.featured_image, class: 'card-img-top', alt: "#{post.featured_image.filename}"), post_path(post) %>
+                <% elsif post.featured_image.video? %>
+                  <%= link_to post_path(post) do %>
+                    <video controls width="300">
+                      <source src="<%= rails_blob_url(post.featured_image) %>" type="<%= post.featured_image.content_type %>">
+                    </video>
+                  <% end %>
+                <% else %>
+                  <%= link_to rails_blob_path(post.featured_image, disposition: "featured_image") do %>
+                    <%= image_tag "pdf.jpg", alt: "Download file", class: 'card-img-top'  %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

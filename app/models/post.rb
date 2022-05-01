@@ -13,6 +13,11 @@ class Post < ApplicationRecord
 
   # Image
   has_one_attached :featured_image do |attachable|
-    attachable.variant :widethumb, resize_to_fill: [740, 320] #indexpage thumb
+    attachable.variant :widethumb, resize_to_fill: [740, 320]
+    attachable.variant :herothumb, resize_to_fill: [570, 370]
   end
+
+  enum posttype: %i[normal featured]
+
+  scope :featured, -> { where(posttype: 1)}
 end
