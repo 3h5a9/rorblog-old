@@ -73,3 +73,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+
+gem 'devise'
+gem "devise"
+gem "devise-i18n"
+gem "devise-bootstrap5"
