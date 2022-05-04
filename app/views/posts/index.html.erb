@@ -5,7 +5,7 @@
     <div class="col">
       <div class="card">
         <div class="row">
-          <div class="col">
+          <div class="col-md-6">
             <% if @fet_post.featured_image.attached? %>
               <% if @fet_post.featured_image.image? %>
                 <%= link_to image_tag(@fet_post.featured_image.variant(:herothumb), class: 'card-img-top', alt: "#{@fet_post.featured_image.filename}"), post_path(@fet_post) %>
@@ -23,7 +23,7 @@
             <% end %>
           </div>
 
-          <div class="col">
+          <div class="col-md-6">
             <div class="card-body">
               <h2 class="card-title"><%= link_to @fet_post.title, post_path(@fet_post), class: 'text-decoration-none fw-bold' %></h2>
               <div class="text-xs text-danger mb-3">
@@ -55,9 +55,11 @@
               <%= link_to image_tag(post.featured_image.variant(:widethumb), class: 'card-img-top', alt: "#{post.featured_image.filename}"), post_path(post) %>
             <% elsif post.featured_image.video? %>
               <%= link_to post_path(post) do %>
+              <div class="ratio ratio-4x3">
               <video autoplay muted controls>
                 <source src="<%= rails_blob_url(post.featured_image) %>" type="<%= post.featured_image.content_type %>">
               </video>
+              </div>
               <% end %>
             <% else %>
               <%= link_to post_path(post) do %>
