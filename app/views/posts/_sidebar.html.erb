@@ -1,0 +1,15 @@
+<div class="col-md-4">
+  <div class="card sticky-top">
+    <div class="card-body py-1 bg-light">
+      <h4 class="card-title"><h4>Categories</h4></h4>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @categories.each do |cat| %>
+      <li class="list-group-item d-flex justify-content-between">
+        <span><%= cat.name %></span>
+        <span><%= cat.posts.count %></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
