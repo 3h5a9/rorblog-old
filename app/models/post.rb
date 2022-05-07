@@ -20,4 +20,6 @@ class Post < ApplicationRecord
   enum posttype: %i[normal featured]
 
   scope :featured, -> { where(posttype: 1)}
+
+  acts_as_votable
 end

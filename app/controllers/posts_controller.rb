@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy upvote downvote]
   before_action :set_categories
   before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @posts = Post.all.order('created_at desc')
+    @posts = Post.all.order('Created_at desc')
     @fet_post = Post.featured.last
   end
 
@@ -39,6 +39,24 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:danger] = 'Post deleted successfully.'
     redirect_to root_path
+  end
+
+  def upvote
+    if current_user.voted_up_on? @post
+      @post.unvote_by current_user
+    else
+      @post.upvote_by current_user
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote
+    if current_user.voted_down_on? @post
+      @post.unvote_by current_user
+    else
+      @post.downvote_by current_user
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   private

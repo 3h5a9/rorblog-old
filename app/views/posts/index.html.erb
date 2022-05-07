@@ -56,9 +56,9 @@
             <% elsif post.featured_image.video? %>
               <%= link_to post_path(post) do %>
               <div class="ratio ratio-4x3">
-              <video autoplay muted controls>
-                <source src="<%= rails_blob_url(post.featured_image) %>" type="<%= post.featured_image.content_type %>">
-              </video>
+                <video autoplay muted controls>
+                  <source src="<%= rails_blob_url(post.featured_image) %>" type="<%= post.featured_image.content_type %>">
+                </video>
               </div>
               <% end %>
             <% else %>
@@ -78,6 +78,22 @@
               <%= post.comments.count %>
             </div>
             <div class="me-2">Category - <%= post.category.name %></div>
+
+            <div class="d-flex">
+              <% if current_user %>
+                <%= render 'posts/vote', post: post %>
+              <% else %>
+                <%= button_to upvote_post_path(post), method: :patch, class: 'btn btn-sm btn-success me-2' do %>
+                  Up
+                  <%= post.votes_for.up.size %>
+                <% end %>
+
+                <%= button_to downvote_post_path(post), method: :patch, class: 'btn btn-sm btn btn-danger' do %>
+                  Down
+                  <%= post.votes_for.down.size %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>

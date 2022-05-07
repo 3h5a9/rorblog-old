@@ -1,0 +1,20 @@
+<%= turbo_frame_tag post do %>
+  <div class="d-flex">
+  <%= button_to upvote_post_path(post), method: :patch, class: 'btn btn-sm btn-success me-2' do %>
+    <% if current_user.voted_up_on? post %>
+      Un Vote
+    <% else %>
+      Up Vote
+    <% end %>
+    <%= post.votes_for.up.size %>
+  <% end %>
+  <%= button_to downvote_post_path(post), method: :patch, class: 'btn btn-sm btn btn-danger me-2' do %>
+    <% if current_user.voted_down_on? post %>
+      Un Vote
+    <% else %>
+      Down Vote  
+    <% end %>
+    <%= post.votes_for.down.size %>
+  <% end %>
+  </div>
+<% end %>
