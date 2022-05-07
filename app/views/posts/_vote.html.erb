@@ -2,17 +2,17 @@
   <div class="d-flex">
   <%= button_to upvote_post_path(post), method: :patch, class: 'btn btn-sm btn-success me-2' do %>
     <% if current_user.voted_up_on? post %>
-      Un Vote
+      <i class="bi bi-x-circle-fill"></i>
     <% else %>
-      Up Vote
+      <i class="bi bi-hand-thumbs-up"></i>
     <% end %>
     <%= post.votes_for.up.size %>
   <% end %>
   <%= button_to downvote_post_path(post), method: :patch, class: 'btn btn-sm btn btn-danger me-2' do %>
     <% if current_user.voted_down_on? post %>
-      Un Vote
+      <i class="bi bi-x-circle-fill"></i>
     <% else %>
-      Down Vote  
+      <i class="bi bi-hand-thumbs-down"></i>
     <% end %>
     <%= post.votes_for.down.size %>
   <% end %>

@@ -84,12 +84,12 @@
                 <%= render 'posts/vote', post: post %>
               <% else %>
                 <%= button_to upvote_post_path(post), method: :patch, class: 'btn btn-sm btn-success me-2' do %>
-                  Up
+                  <i class="bi bi-hand-thumbs-up"></i>
                   <%= post.votes_for.up.size %>
                 <% end %>
 
                 <%= button_to downvote_post_path(post), method: :patch, class: 'btn btn-sm btn btn-danger' do %>
-                  Down
+                  <i class="bi bi-hand-thumbs-down"></i>
                   <%= post.votes_for.down.size %>
                 <% end %>
               <% end %>
