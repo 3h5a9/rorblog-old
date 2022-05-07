@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @posts = Post.all.order('Created_at desc')
+    @pagy, @posts = pagy(Post.all.order('Created_at desc'), items: 3)
     @fet_post = Post.featured.last
   end
 

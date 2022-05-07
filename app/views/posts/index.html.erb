@@ -51,59 +51,62 @@
   <div class="row">
     <div class="col-md-8">
       <div id="posts">
-      <% @posts.each do |post| %>
-        <div class="card mb-3" id="<%= dom_id post %>">
-          <% if post.featured_image.attached? %>
-            <% if post.featured_image.image? %>
-              <%= link_to image_tag(post.featured_image.variant(:widethumb), class: 'card-img-top', alt: "#{post.featured_image.filename}"), post_path(post) %>
-            <% elsif post.featured_image.video? %>
-              <%= link_to post_path(post) do %>
-              <div class="ratio ratio-4x3">
-                <video autoplay muted controls>
-                  <source src="<%= rails_blob_url(post.featured_image) %>" type="<%= post.featured_image.content_type %>">
-                </video>
-              </div>
-              <% end %>
-            <% else %>
-              <%= link_to post_path(post) do %>
-                <%= image_tag 'pdf.jpg', alt: "Download file", class: 'card-img-top' %>
+        <% @posts.each do |post| %>
+          <div class="card mb-3" id="<%= dom_id post %>">
+            <% if post.featured_image.attached? %>
+              <% if post.featured_image.image? %>
+                <%= link_to image_tag(post.featured_image.variant(:widethumb), class: 'card-img-top', alt: "#{post.featured_image.filename}"), post_path(post) %>
+              <% elsif post.featured_image.video? %>
+                <%= link_to post_path(post) do %>
+                <div class="ratio ratio-4x3">
+                  <video autoplay muted controls>
+                    <source src="<%= rails_blob_url(post.featured_image) %>" type="<%= post.featured_image.content_type %>">
+                  </video>
+                </div>
+                <% end %>
+              <% else %>
+                <%= link_to post_path(post) do %>
+                  <%= image_tag 'pdf.jpg', alt: "Download file", class: 'card-img-top' %>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-          <div class="card-body">
-            <h4 class="card-title"><%= link_to truncate(post.title, length: 50), post_path(post), class: 'text-decoration-none' %></h4>
-            <p class="card-text"><%= truncate(strip_tags(post.content.to_s), length: 75) %></p>
-          </div>
-          <div class="card-footer text-xs d-flex justify-content-between">
-            <div class="me-2">Posted <%= time_ago_in_words(post.created_at) %> ago</div>
-            <div class="badge bg-secondary">
-              Comments - 
-              <%= post.comments.count %>
+            <div class="card-body">
+              <h4 class="card-title"><%= link_to truncate(post.title, length: 50), post_path(post), class: 'text-decoration-none' %></h4>
+              <p class="card-text"><%= truncate(strip_tags(post.content.to_s), length: 75) %></p>
             </div>
-            <div class="me-2">Category - <%= post.category.name %></div>
+            <div class="card-footer text-xs d-flex justify-content-between">
+              <div class="me-2">Posted <%= time_ago_in_words(post.created_at) %> ago</div>
+              <div class="badge bg-secondary">
+                Comments - 
+                <%= post.comments.count %>
+              </div>
+              <div class="me-2">Category - <%= post.category.name %></div>
 
-            <div class="d-flex">
-              <% if current_user %>
-                <%= render 'posts/vote', post: post %>
-              <% else %>
-                <%= button_to upvote_post_path(post), method: :patch, class: 'btn btn-sm btn-success me-2' do %>
-                  <i class="bi bi-hand-thumbs-up"></i>
-                  <%= post.votes_for.up.size %>
-                <% end %>
+              <div class="d-flex">
+                <% if current_user %>
+                  <%= render 'posts/vote', post: post %>
+                <% else %>
+                  <%= button_to upvote_post_path(post), method: :patch, class: 'btn btn-sm btn-success me-2' do %>
+                    <i class="bi bi-hand-thumbs-up"></i>
+                    <%= post.votes_for.up.size %>
+                  <% end %>
 
-                <%= button_to downvote_post_path(post), method: :patch, class: 'btn btn-sm btn btn-danger' do %>
-                  <i class="bi bi-hand-thumbs-down"></i>
-                  <%= post.votes_for.down.size %>
+                  <%= button_to downvote_post_path(post), method: :patch, class: 'btn btn-sm btn btn-danger' do %>
+                    <i class="bi bi-hand-thumbs-down"></i>
+                    <%= post.votes_for.down.size %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
       </div>
+
+      <%# Pagination %>
+      <%== pagy_bootstrap_nav(@pagy) %>
     </div>
 
-
+    <%# Sidebar %>
     <%= render 'posts/sidebar' %>
   </div>
 </div>

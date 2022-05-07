@@ -74,7 +74,8 @@ group :test do
   gem "webdrivers"
 end
 
-gem 'devise'
-gem 'devise-i18n'
-gem 'devise-bootstrap5'
 gem 'acts_as_votable'
+gem 'devise'
+gem 'devise-bootstrap5'
+gem 'devise-i18n'
+gem 'pagy'
