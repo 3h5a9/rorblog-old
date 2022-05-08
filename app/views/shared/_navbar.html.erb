@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
     <div class="container">
     <%= link_to root_path, class: 'navbar-brand' do %>
       <div class="h2 d-block mb-0">rorBlog</div>
@@ -9,18 +9,27 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <form class="d-flex my-2 my-lg-0 m-auto w-50">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <ul class="navbar-nav mt-2 mt-lg-0">
+      <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to 'Publish Post', new_post_path, class: 'btn btn-sm btn-primary my-2 me-4' %>
           </li>
         <% end %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle me-2" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        
+        <li class="nav-item dropdown me-2 lh-32">
+          <a href="#" class="nav-link" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-search"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownId">
+            <%= form_with(url: search_posts_path, method: :get, class: 'd-flex my-2 my-lg-0 m-auto mx-2') do |sf| %>
+              <%= sf.search_field :search, name: 'q', class: 'form-control me-sm-2', placeholder: 'Search', style: 'width: 25rem' %>
+              <%= sf.submit('Search', class: 'btn btn-outline-success my-2 my-sm-0') %>
+            <% end %>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown me-2 lh-32">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownId">
             <% if user_signed_in? %>
               <%= link_to 'Add Category', new_category_path, class: 'dropdown-item' %>
@@ -28,8 +37,8 @@
             <%= link_to 'All Category', categories_path, class: 'dropdown-item' %>
           </div>
         </li>
-        <li class="nav-item dropdown">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle mt-1" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown lh-32">
+          <a href="#" class="nav-link dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
           </a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownId">

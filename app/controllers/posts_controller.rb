@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
+# Post Controller
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy upvote downvote]
   before_action :set_categories
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show search]
 
   def index
     @pagy, @posts = pagy(Post.all.order('Created_at desc'), items: 3)
@@ -57,6 +60,11 @@ class PostsController < ApplicationController
       @post.downvote_by current_user
     end
     redirect_back(fallback_location: root_path)
+  end
+
+  def search
+    keyword = params[:q]
+    @posts = Post.where('lower(title) LIKE ?', "%#{keyword.downcase}%")
   end
 
   private
