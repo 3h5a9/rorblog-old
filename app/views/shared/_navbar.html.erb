@@ -39,10 +39,15 @@
         </li>
         <li class="nav-item dropdown lh-32">
           <a href="#" class="nav-link dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" class="rounded-circle" width="32" height="32">
+            <% if user_signed_in? && current_user.avatar.attached? %>
+              <%= image_tag(current_user.avatar.variant(:avataricon), alt: "#{current_user.avatar.filename}", class: 'rounded-circle') %>
+            <% else %>
+              <i class="bi bi-person-circle"></i>
+            <% end %>
           </a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownId">
             <% if user_signed_in? %>
+              <%= link_to 'Settings', edit_user_registration_path, class: 'dropdown-item' %>
               <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
             <% else %>
               <%= link_to 'Sign In', new_user_session_path, class: 'dropdown-item' %>

@@ -15,8 +15,10 @@
           <div class="card-footer text-xs">
             <span class="me-2">Posted <%= time_ago_in_words(category.created_at) %> ago</span>
             | 
-            <%= link_to 'Edit', edit_category_path(category) %>
-            |
+            <% if current_user %>
+              <%= link_to 'Edit', edit_category_path(category) %>
+              |
+            <% end %>
             <span>Number Of Posts - <%= category.posts.count %></span>
           </div>
           <% end %>
