@@ -2,26 +2,27 @@
 
 <div class="container my-5">
   <%# Featured post %>
+  <% if @fet_post %>
   <div class="row my-5">
     <div class="col">
       <div class="card">
         <div class="row">
           <div class="col-md-6">
-            <% if @fet_post.featured_image.attached? %>
-              <% if @fet_post.featured_image.image? %>
-                <%= link_to image_tag(@fet_post.featured_image.variant(:herothumb), class: 'card-img-top', alt: "#{@fet_post.featured_image.filename}"), post_path(@fet_post) %>
-              <% elsif @fet_post.featured_image.video? %>
-                <%= link_to post_path(@fet_post) do %>
-                <video autoplay muted controls>
-                  <source src="<%= rails_blob_url(@fet_post.featured_image) %>" type="<%= @fet_post.featured_image.content_type %>">
-                </video>
-                <% end %>
-              <% else %>
-                <%= link_to post_path(@fet_post) do %>
-                  <%= image_tag 'pdf.jpg', alt: "Download file", class: 'card-img-top' %>
+              <% if @fet_post.featured_image.attached? %>
+                <% if @fet_post.featured_image.image? %>
+                  <%= link_to image_tag(@fet_post.featured_image.variant(:herothumb), class: 'card-img-top', alt: "#{@fet_post.featured_image.filename}"), post_path(@fet_post) %>
+                <% elsif @fet_post.featured_image.video? %>
+                  <%= link_to post_path(@fet_post) do %>
+                  <video autoplay muted controls>
+                    <source src="<%= rails_blob_url(@fet_post.featured_image) %>" type="<%= @fet_post.featured_image.content_type %>">
+                  </video>
+                  <% end %>
+                <% else %>
+                  <%= link_to post_path(@fet_post) do %>
+                    <%= image_tag 'pdf.jpg', alt: "Download file", class: 'card-img-top' %>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
           </div>
 
           <div class="col-md-6">
@@ -46,6 +47,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 
   <%# Blog Posts %>
   <div class="row">
