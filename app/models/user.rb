@@ -6,11 +6,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  has_many :posts
   acts_as_voter
 
   has_one_attached :avatar do |attachable|
     attachable.variant :avataricon, resize_to_fill: [32, 32]
+    attachable.variant :sidebaricon, resize_to_fill: [145, 145]
     attachable.variant :avatarthumbnail, resize_to_fill: [300, 300]
   end
 end

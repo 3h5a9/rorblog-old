@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def index
     @pagy, @posts = pagy(Post.all.order('Created_at desc'), items: 3)
     @fet_post = Post.featured.last
+    @users = User.all
   end
 
   def new
@@ -17,6 +18,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(post_params)
+    @post.user = current_user
     if @post.save
       flash[:success] = 'Post published successfully.'
       redirect_to posts_path

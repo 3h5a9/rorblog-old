@@ -2,8 +2,9 @@
 
 # Post Model
 class Post < ApplicationRecord
+  belongs_to :user
   belongs_to :category
-
+  
   # rich text
   has_rich_text :content
 
