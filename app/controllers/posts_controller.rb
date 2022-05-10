@@ -65,6 +65,7 @@ class PostsController < ApplicationController
   end
 
   def search
+    @users = User.all
     keyword = params[:q]
     @posts = Post.where('lower(title) LIKE ?', "%#{keyword.downcase}%")
   end
