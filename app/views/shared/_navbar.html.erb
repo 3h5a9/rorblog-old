@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm sticky-top">
     <div class="container">
     <%= link_to root_path, class: 'navbar-brand' do %>
       <div class="h2 d-block mb-0">rorBlog</div>
-      <span class="text-xs text-muted text-uppercase">blog for blogger</span>
+      <span class="h4 text-xs text-uppercase text-white">blog for blogger</span>
     <% end %>
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
       <ul class="navbar-nav mt-2 mt-lg-0 ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Publish Post', new_post_path, class: 'btn btn-sm btn-primary my-2 me-4' %>
+            <%= link_to 'Publish Post', new_post_path, class: 'btn btn-sm btn-danger my-2 me-4' %>
           </li>
         <% end %>
         
