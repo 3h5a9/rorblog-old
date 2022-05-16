@@ -40,7 +40,7 @@
         <li class="nav-item dropdown lh-32">
           <a href="#" class="nav-link dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
             <% if user_signed_in? && current_user.avatar.attached? %>
-              <%= cl_image_tag current_user.avatar.key, width: 32, height: 32 %>
+              <%= image_tag(current_user.avatar.variant(:avataricon), alt: "#{current_user.avatar.filename}", class: 'rounded-circle') %>
             <% else %>
               <i class="bi bi-person-circle"></i>
             <% end %>
