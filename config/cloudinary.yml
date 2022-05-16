@@ -1,0 +1,18 @@
+development:
+  cloud_name: dcpge1hon
+  api_key: '156316994544698'
+  api_secret: PVf27L-RBfoCJu8mOdo40t12ktk
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dcpge1hon
+  api_key: '156316994544698'
+  api_secret: PVf27L-RBfoCJu8mOdo40t12ktk
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dcpge1hon
+  api_key: '156316994544698'
+  api_secret: PVf27L-RBfoCJu8mOdo40t12ktk
+  enhance_image_tag: true
+  static_file_support: false

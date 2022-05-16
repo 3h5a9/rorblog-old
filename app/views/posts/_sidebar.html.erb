@@ -21,7 +21,7 @@
         <div class="col-md-6">
           <div>
             <% if user.avatar.attached? %>
-              <%= image_tag user.avatar.variant(:sidebaricon), alt: "#{user.avatar.filename}", class: 'rounded-circle' %>
+              <%= cl_image_tag user.avatar.variant(:sidebaricon).key, alt: "#{user.avatar.filename}", class: 'rounded-circle' %>
             <% end %>
           </div>
           
